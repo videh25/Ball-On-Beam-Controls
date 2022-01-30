@@ -17,8 +17,8 @@ float Ball_On_Beam_Controller::calculate_theta_from_rdot2(float rdot2){
 };
 
 void Ball_On_Beam_Controller::update_state(){
-    curr_distance_ = distance_sensor_.get_distance();
-    curr_speed_ = distance_sensor_.get_speed();
+    // curr_distance_ = distance_sensor_.get_distance();
+    // curr_speed_ = distance_sensor_.get_speed();
 };
 
 void Ball_On_Beam_Controller::update_errors(long const &curr_runtime){
