@@ -44,7 +44,7 @@ class Ball_On_Beam_Controller
         float g_;
 
     public:
-        Ball_On_Beam_Controller();
+        Ball_On_Beam_Controller(float Kp, float Ki, float Kd, int stepPin,int dirPin, int enPin);
         
         void set_target_value(float new_target_value);
 
