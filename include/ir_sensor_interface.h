@@ -8,8 +8,8 @@ class IR_Sensor_Interface
     // Methods and Function of the IR Sensor Interface
     private:
         int IR_Pin_;
-        float distance_values_[3];
-        double time_values_[3];
+        float distance_values_[5];
+        double time_values_[5];
 
     public:
         void get_state(float &dist_var, float &speed_var);
