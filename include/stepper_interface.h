@@ -7,10 +7,10 @@ class Stepper_Interface
 {
     // Methods and Function of the Stepper Motor Interface
     private:
-        float angle_;
         int enPin_;
         int stepPin_;
         int dirPin_;
+        float angle_;
         
     public:
         void achieve_angle(float theta);

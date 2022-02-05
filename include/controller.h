@@ -11,12 +11,6 @@ class Ball_On_Beam_Controller
     // Methods and Function of the Controller
     private:
         IR_Sensor_Interface distance_sensor_;
-        Stepper_Interface stepper_motor;
-
-        // pid gains
-        float Kp_;
-        float Kd_;
-        float Ki_;
 
         // errors
         float error_;
@@ -44,7 +38,13 @@ class Ball_On_Beam_Controller
         float g_;
 
     public:
-        Ball_On_Beam_Controller();
+
+        // pid gains
+        float Kp_;
+        float Kd_;
+        float Ki_;
+        Stepper_Interface stepper_motor;
+        Ball_On_Beam_Controller(float Kp, float Ki, float Kd, int stepPin,int dirPin, int enPin, int IRPin);
         
         void set_target_value(float new_target_value);
 
@@ -55,6 +55,7 @@ class Ball_On_Beam_Controller
         void update_errors(long const &curr_runtime);
 
         void run_once(long const &curr_runtime);
+        void setup_run();
 };
 
 #endif

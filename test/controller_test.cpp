@@ -20,7 +20,6 @@ void setup() {
     Serial.begin(9600);
     controller.setup_run();
     controller.set_target_value((float)15);
-    // Serial.println(controller.Kp_);
 }
 
 void loop() {
@@ -30,13 +29,5 @@ void loop() {
     if ((pepe2 - pepe1) > (1E3F/LOOP_HZ)){
         controller.run_once(pepe2);
         pepe1 = pepe2;
-
-        delay(500);
-        // controller.stepper_motor.achieve_angle(30.);
-        // delay(500);
-        // controller.stepper_motor.achieve_angle(-30.);
     }
-    // controller.stepper_motor.achieve_angle(30.);
-    // delay(2);
-    // controller.stepper_motor.achieve_angle(0.);
 }

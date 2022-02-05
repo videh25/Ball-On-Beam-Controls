@@ -15,12 +15,12 @@ void setup() {
 
 void loop() {
     // put your main code here, to run repeatedly:
-    stepper.achieve_angle(45.);
-    delay(2000);
-    stepper.achieve_angle(90.);
-    delay(2000);
-    stepper.achieve_angle(135.);
-    delay(2000);
-    stepper.achieve_angle(180.);
-    delay(2000);
+    stepper.achieve_angle(30.);
+    delay(500);
+    stepper.achieve_angle(0.);
+    delay(500);
+    stepper.achieve_angle(-30.);
+    delay(500);
+    stepper.achieve_angle(0.);
+    delay(500);
 }
