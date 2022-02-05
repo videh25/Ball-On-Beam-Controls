@@ -20,47 +20,43 @@ void Ball_On_Beam_Controller::setup_run(){
 void Ball_On_Beam_Controller::run_once(long const &curr_runtime){
     update_state();
     update_errors(curr_runtime);
-    // Serial.print("Error: ");
-    // Serial.println(error_);
     float theta = calculate_theta_from_rdot2(calculate_r_dot2());
-    // float theta = 30.;
-    Serial.print("Theta: ");
-    Serial.print(theta);
-    Serial.println("|    ");
+    // Serial.print("Theta: ");
+    // Serial.print(theta);
+    // Serial.print("|    ");
     stepper_motor.achieve_angle(theta);
 };
 
 float Ball_On_Beam_Controller::calculate_r_dot2(){
-    // return Kp_*error_ + Kd_*diff_error_ + Ki_*integral_error_;
-    Serial.print("Kp: ");
-    Serial.print(Kp_);
-    Serial.print("|    ");
-    return Kp_*error_ ;
+    return Kp_*error_ + Kd_*diff_error_ + Ki_*integral_error_;
+    // Serial.print("Kp_term: ");
+    // Serial.print(Kp_*error_ );
+    // Serial.print("|    ");
+    // Serial.print("Kd_term: ");
+    // Serial.print(Kd_*diff_error_ );
+    // Serial.print("|    ");
 };
 
 float Ball_On_Beam_Controller::calculate_theta_from_rdot2(float rdot2){
-    Serial.print("rodt2: ");
-    Serial.print(rdot2);
-    Serial.print("|    ");
+    // Serial.print("rodt2: ");
+    // Serial.print(rdot2);
+    // Serial.print("|    ");
     float alpha_p45 = 0.7853981633974483 + asin(0.0019513615843891072*(-rdot2));/* M_PI/4 + asin(0.0019513615843891072*rdot2)*/ 
     if (isnan(alpha_p45)){
         return 0.;
     }
-    // Serial.print("Alpha: ");
-    // Serial.println(alpha_p45*180./M_PI - 45);
-    // Serial.print("DIstance: ");
-    // Serial.println(curr_distance_);
-    // Serial.print("Speed: ");
-    // Serial.println(curr_speed_);
     // return 135 - acos((1.4142135623730951 - 180./M_PI*(2* cos(alpha_p45))/sqrt(6 - 5.656854249492381*cos(alpha_p45))) + acos(sqrt(6 - 5.656854249492381*cos(alpha_p45))/2));
     return 2*(alpha_p45*180./M_PI - 45.);
 };
 
 void Ball_On_Beam_Controller::update_state(){
     distance_sensor_.get_state(curr_distance_, curr_speed_);
-    Serial.print("Distance: ");
-    Serial.print(curr_distance_);
-    Serial.print("|    ");
+    // Serial.print("Distance: ");
+    // Serial.print(curr_distance_);
+    // Serial.print("|    ");
+    // Serial.print("Speed: ");
+    // Serial.print(curr_speed_);
+    // Serial.print("|    ");
 };
 
 void Ball_On_Beam_Controller::update_errors(long const &curr_runtime){

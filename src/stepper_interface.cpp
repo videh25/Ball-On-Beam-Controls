@@ -1,6 +1,8 @@
 #include <Arduino.h>
 #include "stepper_interface.h"
 
+#define STEP_DELAY 1000.
+
 Stepper_Interface::Stepper_Interface(int stepPin,int dirPin, int enPin):
     stepPin_(stepPin),
     dirPin_(dirPin),
@@ -24,11 +26,14 @@ void Stepper_Interface::achieve_angle(float theta){
     // Serial.println(theta);
     // Serial.print("Angle: ");
     // Serial.println(angle_);
-    while (angle_!=theta){
+    if (angle_!=theta){
         float haha_angle = theta - angle_;
         // Serial.print("HAHA: ");
         // Serial.println(haha_angle);
         // Serial.println("Yahaa atka h0");
+        if (abs(haha_angle)<3.){
+            return;
+        }
         if (haha_angle < 0 ){
             digitalWrite(dirPin_, LOW);
             int step = map(haha_angle, 0, 360, 0, 3200);
@@ -38,9 +43,9 @@ void Stepper_Interface::achieve_angle(float theta){
             // Serial.print("Yahaa atka h1");
             for (int i = 0; i > step; i--){
                 digitalWrite(stepPin_, HIGH);
-                delayMicroseconds(500);
+                delayMicroseconds(STEP_DELAY);
                 digitalWrite(stepPin_, LOW);
-                delayMicroseconds(500);
+                delayMicroseconds(STEP_DELAY);
                 // Serial.print("Andar aa gayaa");
             }
             angle_ = theta;
@@ -54,9 +59,9 @@ void Stepper_Interface::achieve_angle(float theta){
             // Serial.println(step);
             for (int i = 0; i < step; i++){
                 digitalWrite(stepPin_, HIGH);
-                delayMicroseconds(500);
+                delayMicroseconds(STEP_DELAY);
                 digitalWrite(stepPin_, LOW);
-                delayMicroseconds(500);
+                delayMicroseconds(STEP_DELAY);
                 // Serial.print("Andar aa gayaa");
             }
             angle_ = theta;
