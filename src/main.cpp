@@ -4,8 +4,8 @@
 #include "controller.h"
 
 
-#define KP 4. //4.
-#define KD 0.001 //0.005
+#define KP 3. //4.
+#define KD 4.2 //0.005
 #define KI 0.
 #define DIR_PIN 2
 #define STEP_PIN 5
@@ -23,10 +23,10 @@ void setup() {
     // put your setup code here, to run once:
     Serial.begin(115200);
     controller.setup_run();
-    controller.set_target_value(25.);
+    controller.set_target_value(20.);
     // Serial.println(controller.Kp_);
     Serial.println("10 secs to turn on motor:");
-    for (int i = 0; i < 10; i++){
+    for (int i = 0; i < 5; i++){
         Serial.print("TICK TICK ");
         Serial.println(i+1);
         delay(1000);
@@ -39,8 +39,8 @@ void loop() {
 
     if ((pepe2 - pepe1) > (1E3F/LOOP_HZ)){
         controller.run_once(pepe2);
-        Serial.print("|    Time: ");
-        Serial.println(pepe2 - pepe1);
+        //Serial.print("|    Time: ");
+        //Serial.println(pepe2 - pepe1);
         pepe1 = pepe2;
     }
 }

@@ -28,7 +28,9 @@ void IR_Sensor_Interface::get_state(float &dist_var, float &speed_var){
     //     // time_values_[i] = (time_values_[i] - t0)/1E6;
     // }
     dist_var=(distance_values_[2]+distance_values_[3]+distance_values_[4])/3 ;
-    speed_var=(distance_values_[4]-distance_values_[1])/(3*(time_values_[4]-time_values_[3]))*1E6;
+    speed_var=(distance_values_[4]-distance_values_[1])/(3*(1));
+    if (abs(speed_var)<0.01){speed_var=0;} //perform the derivative of the error and add a dead band
+    speed_var=constrain(speed_var,-5,5); //limit the max size of the derivative of error to reduce high freq
     // float dist1 = sum/3;
 
     // update_values();

@@ -51,8 +51,9 @@ float Ball_On_Beam_Controller::calculate_theta_from_rdot2(float rdot2){
 
 void Ball_On_Beam_Controller::update_state(){
     distance_sensor_.get_state(curr_distance_, curr_speed_);
+    
     // Serial.print("Distance: ");
-    // Serial.print(curr_distance_);
+    // Serial.println(curr_distance_);
     // Serial.print("|    ");
     // Serial.print("Speed: ");
     // Serial.print(curr_speed_);
