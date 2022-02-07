@@ -9,16 +9,16 @@ float speed;
 
 void setup() {
     // put your setup code here, to run once:
-    Serial.begin(9600);
+    Serial.begin(115200);
     IR.IR_sensor_setup_code();
 }
 
 void loop() {
     // put your main code here, to run repeatedly:
-    delay(1000);
+    delay(20);
     IR.get_state(dist, speed);
     Serial.print("Distance: ");
-    Serial.println(dist);
-    Serial.print("Speed: ");
+    Serial.print(dist);
+    Serial.print("|    Speed: ");
     Serial.println(speed);
 }

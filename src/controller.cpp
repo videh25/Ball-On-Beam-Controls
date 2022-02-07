@@ -21,9 +21,9 @@ void Ball_On_Beam_Controller::run_once(long const &curr_runtime){
     update_state();
     update_errors(curr_runtime);
     float theta = calculate_theta_from_rdot2(calculate_r_dot2());
-    // Serial.print("Theta: ");
-    // Serial.print(theta);
-    // Serial.print("|    ");
+    Serial.print("Theta: ");
+    Serial.print(theta);
+    Serial.print("|    ");
     stepper_motor.achieve_angle(theta);
 };
 
@@ -52,9 +52,9 @@ float Ball_On_Beam_Controller::calculate_theta_from_rdot2(float rdot2){
 void Ball_On_Beam_Controller::update_state(){
     distance_sensor_.get_state(curr_distance_, curr_speed_);
     
-    // Serial.print("Distance: ");
-    // Serial.println(curr_distance_);
-    // Serial.print("|    ");
+    Serial.print("Distance: ");
+    Serial.println(curr_distance_);
+    Serial.print("|    ");
     // Serial.print("Speed: ");
     // Serial.print(curr_speed_);
     // Serial.print("|    ");
@@ -62,7 +62,7 @@ void Ball_On_Beam_Controller::update_state(){
 
 void Ball_On_Beam_Controller::update_errors(long const &curr_runtime){
     error_ = target_value_ - curr_distance_;
-    diff_error_ = -curr_speed_;
+    diff_error_ = -curr_speed_/((float)(curr_runtime - last_runtime_));
     integral_error_ += 0.5*(error_ + last_error_)*(curr_runtime - last_runtime_);
 
     last_error_ = error_;

@@ -1,6 +1,8 @@
 #include <Arduino.h>
 #include "ir_sensor_interface.h"
 
+#define SPEED_MULTIPLE 10.
+
 IR_Sensor_Interface::IR_Sensor_Interface(int irPin):
     IR_Pin_(irPin){
     // nothing here
@@ -32,10 +34,10 @@ void IR_Sensor_Interface::get_state(float &dist_var, float &speed_var){
 
     dist_var = 27.728*pow(map(sum/5., 0, 1023, 0, 5000)/1000.0, -1.2045);
 
-    if (speed_counter > 10){
-        curr_return_speed = dist_var - last_dist_var_4speed;
-        if (abs(curr_return_speed)<0.1){curr_return_speed=0;}
-        curr_return_speed = constrain(curr_return_speed,-5,5);
+    if (speed_counter > SPEED_MULTIPLE){
+        curr_return_speed = (dist_var - last_dist_var_4speed);
+        if (abs(curr_return_speed)<1.){curr_return_speed=0;}
+        curr_return_speed = constrain(curr_return_speed,-7,7);
 
         last_dist_var_4speed = dist_var;
         speed_counter = 0;
