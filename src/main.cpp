@@ -4,8 +4,8 @@
 #include "controller.h"
 
 
-#define KP 5.
-#define KD 4.47//4.2 //0.005
+#define KP  4.5
+#define KD 69.//75. //69.
 #define KI 0.
 
 #define DIR_PIN 2
@@ -26,8 +26,8 @@ void setup() {
     controller.setup_run();
     controller.set_target_value(20.);
     // Serial.println(controller.Kp_);
-    Serial.println("10 secs to turn on motor:");
-    for (int i = 0; i < 10; i++){
+    Serial.println("7 secs to turn on motor:");
+    for (int i = 0; i < 7; i++){
         Serial.print("TICK TICK ");
         Serial.println(i+1);
         delay(1000);

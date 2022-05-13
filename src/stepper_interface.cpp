@@ -20,7 +20,7 @@ void Stepper_Interface::Stepper_Interface_setup_run(){
 };
 
 void Stepper_Interface::achieve_angle(float theta){
-    theta = min(68.,max(-68., theta));
+    theta = min(10.,max(-10., theta));
     theta = theta - fmodf(theta,0.1125);
     // Serial.print("Theta:");
     // Serial.println(theta);
@@ -31,7 +31,7 @@ void Stepper_Interface::achieve_angle(float theta){
         // Serial.print("HAHA: ");
         // Serial.println(haha_angle);
         // Serial.println("Yahaa atka h0");
-        if (abs(haha_angle)<3.){
+        if (abs(haha_angle)<1.5){
             return;
         }
         if (haha_angle < 0 ){

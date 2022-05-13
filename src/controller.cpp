@@ -19,8 +19,13 @@ void Ball_On_Beam_Controller::setup_run(){
 
 void Ball_On_Beam_Controller::run_once(long const &curr_runtime){
     update_state();
+    float theta;
     update_errors(curr_runtime);
-    float theta = calculate_theta_from_rdot2(calculate_r_dot2());
+    if (curr_distance_ < 10){
+        theta = -10.;
+    }else{
+        theta = calculate_theta_from_rdot2(calculate_r_dot2());
+    }
     Serial.print("Theta: ");
     Serial.print(theta);
     Serial.print("|    ");
@@ -70,5 +75,5 @@ void Ball_On_Beam_Controller::update_errors(long const &curr_runtime){
 };
 
 void Ball_On_Beam_Controller::set_target_value(float new_target_value){
-    target_value_ = new_target_value;
+    target_value_ = new_target_value - 2.;
 }
